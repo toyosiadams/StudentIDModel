@@ -1,0 +1,109 @@
+#include <iostream>
+using namespace std;
+
+class GPA
+{
+private:
+    double SPCgpa;
+public:
+    void setSPCgpa(double);
+    double getSPCgpa();
+    string getLevel();
+
+};
+
+void GPA::setSPCgpa(double gpa)
+{
+    SPCgpa = gpa;
+}
+
+double GPA::getSPCgpa()
+{
+    return SPCgpa;
+}
+
+string GPA::getLevel()
+{
+    if (SPCgpa >= 3.5 && SPCgpa <= 4.0)
+        return "Excellent";
+    else if (SPCgpa >= 3.0 && SPCgpa <= 3.4)
+        return "Very good";
+    else if (SPCgpa >= 2.5 && SPCgpa <= 2.9)
+        return "Good";
+    else if (SPCgpa >= 2.0 && SPCgpa <= 2.4)
+        return "Satisfcatory";
+    else if (SPCgpa >= 1.0 && SPCgpa <= 1.9)
+        return "Marginal";
+    else if (SPCgpa >= 0 && SPCgpa <= 0.9)
+        return "Failure";
+}
+
+class Studentinfor : public GPA
+{
+private:
+    string phone;
+    string studentID;
+public:
+    void setPhone(string);
+    void setStudentID(string);
+    string getPhone();
+    string getStudentID();
+};
+
+void Studentinfor::setPhone(string p)
+{
+    phone = p;
+}
+void Studentinfor::setStudentID(string s)
+{
+    studentID = s;
+}
+string Studentinfor::getPhone()
+{
+    return phone;
+}
+string Studentinfor::getStudentID()
+{
+    return studentID;;
+}
+
+
+class Student : public GPA
+{
+private:
+    string name;
+    GPA gpaobj;
+    Studentinfor inforobj;
+public:
+    void setAll(string, double, string, string);
+    void printAll();
+};
+
+void Student::setAll(string name, double gpa, string phone, string studentID)
+{
+    this->name = name;
+    gpaobj.setSPCgpa(gpa);
+    inforobj.setPhone(phone);
+    inforobj.setStudentID(studentID);
+}
+
+void Student::printAll() 
+{
+    cout << "Student's name: " << name << endl;
+    cout << "Phone #: " << inforobj.getPhone() << endl;
+    cout << "ID: " << inforobj.getStudentID() << endl;
+    cout << "Level: " << gpaobj.getLevel() << endl;
+}
+
+int main()
+{
+    Student object1;
+    object1.setAll("Olivia Johnson", 3.6, "8064235483", "52158");
+    Student object2;
+    object2.setAll("Benjamin Williams", 0.2, "8065276589", "6852");
+    object1.printAll();
+    cout << endl;
+    object2.printAll();
+    return 0;
+
+}
